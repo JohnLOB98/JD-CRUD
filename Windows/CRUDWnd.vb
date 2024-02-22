@@ -1,9 +1,8 @@
 ﻿
 'Rerefence https://www.youtube.com/watch?v=n7SRRnN-geU
 Imports System.Data.SqlClient
-Imports System.Security.Cryptography
 
-Public Class Form1
+Public Class CRUDWnd
 
     Public connection As String = "Data Source=DESKTOP-CNSF48P\TEW_SQLEXPRESS;Initial Catalog=CRUD_JD;User ID=sa;Password=y6dreqbc;"
 
@@ -11,16 +10,12 @@ Public Class Form1
 
         ' Reference https://www.youtube.com/watch?v=e2ovoOWObiM
         Dim ProcedureName As String = "GetAllProducts"
-        ExecuteProcedureQuery(ProcedureName)
-
+        DataGridView1.DataSource = UtilityProcedures.ExecuteProcedureQuery(ProcedureName)
 
         cmbColor.SelectedIndex = 0
         radAllowed.Checked = True
-
         txtName.MaxLength = 50
         txtDesign.MaxLength = 150
-
-
         'DataGridView1.Columns(1).Width = 100
 
         DataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill
@@ -42,19 +37,12 @@ Public Class Form1
     'EVENTS ON CLICK
     Private Sub btnInsert_Click(sender As Object, e As EventArgs) Handles btnInsert.Click
 
-
         Dim pid As String = txtID.Text
         Dim name As String = txtName.Text
         Dim design As String = txtDesign.Text
         Dim color As String = cmbColor.Text
         Dim daTime As String = DTP1.Value.ToString("yyyy/MM/dd")
         Dim wtype As String = If((radAllowed.Checked), "Allowed", "Not Allowed")
-
-        'If radAllowed.Checked Then
-        '    wtype = "Allowed"
-        'Else
-        '    wtype = "Not Allowed"
-        'End If
 
         'METHOD 1
         'Dim query As String = $"INSERT INTO TableProduct values ({pid}, '{name}', '{design}', '{color}', '{daTime}' , '{wtype}')"
@@ -73,10 +61,11 @@ Public Class Form1
                 New ParameterProduct("@WarrantlyType", SqlDbType.NVarChar, wtype)
         }
 
-        ExecuteProcedureTransaction(ProcedureName, ListParameters)
+        UtilityProcedures.ExecuteProcedureTransaction(ProcedureName, ListParameters)
 
         ProcedureName = "GetAllProducts"
-        ExecuteProcedureQuery(ProcedureName)
+        DataGridView1.DataSource = UtilityProcedures.ExecuteProcedureQuery(ProcedureName)
+        'ExecuteProcedureQuery(ProcedureName)
 
         'Dim parameters(ListParameters.Count - 1) As SqlParameter
 
@@ -112,7 +101,7 @@ Public Class Form1
         '    cmd.ExecuteNonQuery()
         '    con.Close()
 
-        MessageBox.Show("Succesfully INSERT")
+        'MessageBox.Show("Succesfully INSERT")
 
     End Sub
 
@@ -141,15 +130,13 @@ Public Class Form1
                 New ParameterProduct("@WarrantlyType", SqlDbType.NVarChar, wtype)
         }
 
-        ExecuteProcedureTransaction(ProcedureName, ListParameters)
 
-        'ExecuteTransaction(query)
+        UtilityProcedures.ExecuteProcedureTransaction(ProcedureName, ListParameters)
 
         ProcedureName = "GetAllProducts"
-        ExecuteProcedureQuery(ProcedureName)
-        'query = "SELECT * FROM TableProduct"
-        'LoadDataGridView(query)
-        MessageBox.Show("Successfully UPDATED")
+        DataGridView1.DataSource = UtilityProcedures.ExecuteProcedureQuery(ProcedureName)
+
+        'MessageBox.Show("Successfully UPDATED")
 
     End Sub
 
@@ -160,26 +147,17 @@ Public Class Form1
         Dim r As DialogResult = MessageBox.Show($"Do you really want to delete the product {pid}", "caption", MessageBoxButtons.YesNo)
         If r = DialogResult.Yes Then
 
-            'Dim query As String = $"DELETE TableProduct WHERE Product_ID = {pid}"
-            ''ExecuteTransaction(query)
-
-            'query = $"SELECT * FROM TableProduct"
-            'LoadDataGridView(query)
-
             Dim ProcedureName As String = "DeleteProduct"
             Dim ListParameters As New List(Of ParameterProduct) From {
                 New ParameterProduct("@Product_ID", SqlDbType.Int, pid)
             }
 
-            ExecuteProcedureTransaction(ProcedureName, ListParameters)
-
-            'ExecuteTransaction(query)
+            UtilityProcedures.ExecuteProcedureTransaction(ProcedureName, ListParameters)
 
             ProcedureName = "GetAllProducts"
-            ExecuteProcedureQuery(ProcedureName)
+            DataGridView1.DataSource = UtilityProcedures.ExecuteProcedureQuery(ProcedureName)
 
-
-            MessageBox.Show("Successfully DELETED")
+            'MessageBox.Show("Successfully DELETED")
 
         End If
 
@@ -220,16 +198,16 @@ Public Class Form1
         'Dim query As String = If((id = ""), $"SELECT * FROM TableProduct", $"SELECT * FROM TableProduct WHERE Product_ID LIKE {pid}")
         'LoadDataGridView(query)
 
-
-
         If pid = "" Then
-            ExecuteProcedureQuery("GetAllProducts")
+
+            DataGridView1.DataSource = UtilityProcedures.ExecuteProcedureQuery("GetAllProducts")
         Else
+
             Dim ListParameters As New List(Of ParameterProduct) From {
                 New ParameterProduct("@Product_ID", SqlDbType.Int, pid)
             }
 
-            ExecuteProcedureQuery("SearchProduct", ListParameters)
+            DataGridView1.DataSource = UtilityProcedures.ExecuteProcedureQuery("SearchProduct", ListParameters)
         End If
 
 
@@ -263,105 +241,18 @@ Public Class Form1
         End If
     End Sub
 
-
-
-
-
-
-    'EVENTS CUSTOM
-    'Public Sub ExecuteTransaction(query As String)
+    'Public Sub LoadDataGridView(query As String)
 
     '    Dim con As New SqlConnection(connection)
     '    con.Open()
     '    Dim cmd As New SqlCommand(query, con)
-    '    cmd.ExecuteNonQuery()
+    '    Dim da As New SqlDataAdapter(cmd)
     '    con.Close()
+    '    Dim dt As New DataTable
+    '    da.Fill(dt)
+    '    DataGridView1.DataSource = dt
 
     'End Sub
-
-    Public Sub ExecuteProcedureQuery(ProcedureName As String)
-
-        Dim con As New SqlConnection(connection)
-        Dim cmd As New SqlCommand(ProcedureName, con)
-        cmd.CommandType = CommandType.StoredProcedure
-
-        con.Open()
-        Dim da As New SqlDataAdapter(cmd)
-        con.Close()
-        Dim dt As New DataTable
-        da.Fill(dt)
-        DataGridView1.DataSource = dt
-
-    End Sub
-
-    Public Sub ExecuteProcedureQuery(ProcedureName As String, ListParameters As List(Of ParameterProduct))
-
-        Dim parameters(ListParameters.Count - 1) As SqlParameter
-        Dim i As Integer = 0
-
-        For Each p As ParameterProduct In ListParameters
-            parameters(i) = New SqlParameter(p.parameterName, p.dbType)
-            parameters(i).Value = p.value
-            i += 1
-        Next
-
-        Dim con As New SqlConnection(connection)
-        Dim cmd As New SqlCommand(ProcedureName, con)
-        cmd.Parameters.AddRange(parameters)
-        cmd.CommandType = CommandType.StoredProcedure
-
-        con.Open()
-        Dim da As New SqlDataAdapter(cmd)
-        con.Close()
-        Dim dt As New DataTable
-        da.Fill(dt)
-        DataGridView1.DataSource = dt
-
-    End Sub
-
-    Public Sub ExecuteProcedureTransaction(ProcedureName As String, ListParameters As List(Of ParameterProduct))
-
-        Dim parameters(ListParameters.Count - 1) As SqlParameter
-
-        Dim i As Integer = 0
-        For Each p As ParameterProduct In ListParameters
-            parameters(i) = New SqlParameter(p.parameterName, p.dbType)
-            parameters(i).Value = p.value
-            i += 1
-        Next
-
-        Dim con As New SqlConnection(connection)
-        Dim cmd As New SqlCommand()
-        cmd.Parameters.AddRange(parameters)
-        cmd.CommandType = CommandType.StoredProcedure
-        cmd.Connection = con
-        cmd.CommandText = ProcedureName
-
-        con.Open()
-        cmd.ExecuteNonQuery()
-        con.Close()
-
-
-
-        'LoadDataGridView()
-
-    End Sub
-
-    Public Sub LoadDataGridView(query As String)
-
-        Dim con As New SqlConnection(connection)
-        con.Open()
-        Dim cmd As New SqlCommand(query, con)
-        Dim da As New SqlDataAdapter(cmd)
-        con.Close()
-        Dim dt As New DataTable
-        da.Fill(dt)
-        DataGridView1.DataSource = dt
-
-    End Sub
-
-
-
 
 
 

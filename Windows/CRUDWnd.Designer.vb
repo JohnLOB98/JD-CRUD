@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
-Partial Class Form1
+Partial Class CRUDWnd
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -47,6 +47,7 @@ Partial Class Form1
         ' 
         ' txtID
         ' 
+        txtID.Anchor = AnchorStyles.None
         txtID.Location = New Point(161, 106)
         txtID.Name = "txtID"
         txtID.Size = New Size(100, 23)
@@ -54,6 +55,7 @@ Partial Class Form1
         ' 
         ' txtName
         ' 
+        txtName.Anchor = AnchorStyles.None
         txtName.Location = New Point(161, 157)
         txtName.Name = "txtName"
         txtName.Size = New Size(100, 23)
@@ -61,6 +63,7 @@ Partial Class Form1
         ' 
         ' txtDesign
         ' 
+        txtDesign.Anchor = AnchorStyles.None
         txtDesign.Location = New Point(161, 205)
         txtDesign.Name = "txtDesign"
         txtDesign.Size = New Size(100, 23)
@@ -68,6 +71,7 @@ Partial Class Form1
         ' 
         ' cmbColor
         ' 
+        cmbColor.Anchor = AnchorStyles.None
         cmbColor.DropDownStyle = ComboBoxStyle.DropDownList
         cmbColor.FormattingEnabled = True
         cmbColor.ItemHeight = 15
@@ -80,6 +84,7 @@ Partial Class Form1
         ' 
         ' DTP1
         ' 
+        DTP1.Anchor = AnchorStyles.None
         DTP1.CustomFormat = "dd/MM/YY"
         DTP1.Format = DateTimePickerFormat.Short
         DTP1.Location = New Point(161, 295)
@@ -89,6 +94,7 @@ Partial Class Form1
         ' 
         ' btnInsert
         ' 
+        btnInsert.Anchor = AnchorStyles.None
         btnInsert.BackColor = Color.White
         btnInsert.FlatStyle = FlatStyle.Flat
         btnInsert.Location = New Point(158, 367)
@@ -100,6 +106,7 @@ Partial Class Form1
         ' 
         ' btnUpdate
         ' 
+        btnUpdate.Anchor = AnchorStyles.None
         btnUpdate.BackColor = Color.White
         btnUpdate.FlatStyle = FlatStyle.Flat
         btnUpdate.Location = New Point(281, 367)
@@ -111,6 +118,7 @@ Partial Class Form1
         ' 
         ' btnDelete
         ' 
+        btnDelete.Anchor = AnchorStyles.None
         btnDelete.BackColor = Color.White
         btnDelete.FlatStyle = FlatStyle.Flat
         btnDelete.Location = New Point(404, 367)
@@ -122,6 +130,7 @@ Partial Class Form1
         ' 
         ' radAllowed
         ' 
+        radAllowed.Anchor = AnchorStyles.None
         radAllowed.AutoSize = True
         radAllowed.Location = New Point(161, 333)
         radAllowed.Name = "radAllowed"
@@ -133,6 +142,7 @@ Partial Class Form1
         ' 
         ' radNotAllowed
         ' 
+        radNotAllowed.Anchor = AnchorStyles.None
         radNotAllowed.AutoSize = True
         radNotAllowed.Location = New Point(279, 333)
         radNotAllowed.Name = "radNotAllowed"
@@ -144,6 +154,7 @@ Partial Class Form1
         ' 
         ' Label1
         ' 
+        Label1.Anchor = AnchorStyles.None
         Label1.AutoSize = True
         Label1.Font = New Font("Segoe UI", 40F)
         Label1.Location = New Point(161, 9)
@@ -154,6 +165,7 @@ Partial Class Form1
         ' 
         ' DataGridView1
         ' 
+        DataGridView1.Anchor = AnchorStyles.None
         DataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridView1.Location = New Point(158, 405)
         DataGridView1.Name = "DataGridView1"
@@ -162,6 +174,7 @@ Partial Class Form1
         ' 
         ' Label2
         ' 
+        Label2.Anchor = AnchorStyles.None
         Label2.AutoSize = True
         Label2.Location = New Point(82, 109)
         Label2.Name = "Label2"
@@ -171,6 +184,7 @@ Partial Class Form1
         ' 
         ' Label3
         ' 
+        Label3.Anchor = AnchorStyles.None
         Label3.AutoSize = True
         Label3.Location = New Point(81, 160)
         Label3.Name = "Label3"
@@ -180,6 +194,7 @@ Partial Class Form1
         ' 
         ' Label4
         ' 
+        Label4.Anchor = AnchorStyles.None
         Label4.AutoSize = True
         Label4.Location = New Point(102, 208)
         Label4.Name = "Label4"
@@ -189,6 +204,7 @@ Partial Class Form1
         ' 
         ' Label5
         ' 
+        Label5.Anchor = AnchorStyles.None
         Label5.AutoSize = True
         Label5.Location = New Point(104, 254)
         Label5.Name = "Label5"
@@ -198,6 +214,7 @@ Partial Class Form1
         ' 
         ' Label6
         ' 
+        Label6.Anchor = AnchorStyles.None
         Label6.AutoSize = True
         Label6.Location = New Point(60, 333)
         Label6.Name = "Label6"
@@ -207,6 +224,7 @@ Partial Class Form1
         ' 
         ' Label7
         ' 
+        Label7.Anchor = AnchorStyles.None
         Label7.AutoSize = True
         Label7.Location = New Point(81, 301)
         Label7.Name = "Label7"
@@ -216,6 +234,7 @@ Partial Class Form1
         ' 
         ' txtSearch
         ' 
+        txtSearch.Anchor = AnchorStyles.None
         txtSearch.Location = New Point(544, 106)
         txtSearch.Name = "txtSearch"
         txtSearch.Size = New Size(100, 23)
@@ -223,6 +242,7 @@ Partial Class Form1
         ' 
         ' Label8
         ' 
+        Label8.Anchor = AnchorStyles.None
         Label8.AutoSize = True
         Label8.Location = New Point(466, 109)
         Label8.Name = "Label8"
@@ -235,6 +255,7 @@ Partial Class Form1
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(1311, 618)
+        ControlBox = False
         Controls.Add(Label8)
         Controls.Add(txtSearch)
         Controls.Add(Label7)
@@ -258,6 +279,7 @@ Partial Class Form1
         Name = "Form1"
         StartPosition = FormStartPosition.CenterScreen
         Text = "Form1"
+        WindowState = FormWindowState.Maximized
         CType(DataGridView1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
