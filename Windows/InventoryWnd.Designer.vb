@@ -22,24 +22,12 @@ Partial Class InventoryWnd
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        btnScan = New Button()
         DataGridView1 = New DataGridView()
         TextBox1 = New TextBox()
         Label1 = New Label()
         btnSell = New Button()
         CType(DataGridView1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
-        ' 
-        ' btnScan
-        ' 
-        btnScan.Anchor = AnchorStyles.None
-        btnScan.FlatStyle = FlatStyle.Flat
-        btnScan.Location = New Point(344, 111)
-        btnScan.Name = "btnScan"
-        btnScan.Size = New Size(71, 25)
-        btnScan.TabIndex = 0
-        btnScan.Text = "Scan"
-        btnScan.UseVisualStyleBackColor = True
         ' 
         ' DataGridView1
         ' 
@@ -89,7 +77,6 @@ Partial Class InventoryWnd
         Controls.Add(TextBox1)
         Controls.Add(DataGridView1)
         Controls.Add(btnSell)
-        Controls.Add(btnScan)
         Name = "InventoryWnd"
         StartPosition = FormStartPosition.CenterParent
         Text = "Inventory"
@@ -98,8 +85,6 @@ Partial Class InventoryWnd
         ResumeLayout(False)
         PerformLayout()
     End Sub
-
-    Friend WithEvents btnScan As Button
     Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents TextBox1 As TextBox
     Friend WithEvents Label1 As Label
